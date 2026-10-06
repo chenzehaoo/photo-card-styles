@@ -1,0 +1,4 @@
+interface:
+  display_name: "Photo Card Styles"
+  short_description: "125 photo presets, image exports and interactive 3D frames"
+  default_prompt: "Use $photo-card-styles to frame my photos, customize captions, export finished images and add an interactive 3D view while preserving card dimensions."

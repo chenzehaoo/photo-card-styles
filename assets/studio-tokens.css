@@ -1,0 +1,34 @@
+.style-studio, .photo-scene, .export-panel {
+  --ui-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+  --ui-ink: #242629;
+  --ui-muted: #62686e;
+  --ui-line: #dce0e3;
+  --ui-surface: #ffffff;
+  --ui-canvas: #f0f1f3;
+  --ui-subtle: #f7f8f9;
+  --ui-accent: #176656;
+  --ui-selected: #eaf4ef;
+  --ui-favorite: #a33b61;
+  --ui-radius: 6px;
+  color: var(--ui-ink);
+  font-family: var(--ui-font);
+  letter-spacing: 0;
+}
+.style-studio *, .photo-scene *, .export-panel * { box-sizing: border-box; }
+.studio-header, .style-library, .photo-scene {
+  --ui-ink: #f5f6f7;
+  --ui-muted: #b1b6bd;
+  --ui-line: #383b40;
+  --ui-surface: #202226;
+  --ui-canvas: #17191c;
+  --ui-subtle: #24262b;
+  --ui-accent: #d3ee87;
+  --ui-selected: #343e29;
+  --ui-favorite: #ff9dbf;
+  color: var(--ui-ink);
+}
+:where(.style-studio, .photo-scene, .export-panel) :is(button, uni-button, select, input, textarea, a):focus-visible {
+  outline: 2px solid var(--ui-accent); outline-offset: 3px;
+}
+:where(.style-studio, .photo-scene, .export-panel) :is(button, uni-button)::after { border: 0; }
+:where(.style-studio, .photo-scene, .export-panel) ::selection { color: #163b30; background: #cbe8dd; }
