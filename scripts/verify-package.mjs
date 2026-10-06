@@ -7,6 +7,9 @@ const errors = [];
 const required = [
   'SKILL.md', 'README.md', 'LICENSE', '.gitignore', 'THIRD_PARTY_NOTICES.md',
   'agents/openai.yaml', 'references/integration.md', 'examples/BasicPhoto.vue',
+  'docs/architecture.md', 'docs/gallery.md',
+  ...['holo', 'awakening', 'mythic', 'summon', 'diffraction', 'cyber',
+    'studio-flat', 'studio-three', 'assembled', 'exploded'].map(name => `docs/images/${name}.png`),
   ...['PhotoCard.vue', 'catalog.ts', 'styles.css', 'state.ts', 'NativeField.ts',
     'NativeButton.ts', 'studio-tokens.css', 'PhotoStyleStudio.vue', 'PhotoScene.vue',
     'ExportPanel.vue', 'export.ts', 'frame3d.ts', 'layered3d.ts', 'game3d.ts',
@@ -39,6 +42,17 @@ for (const path of files) {
   const source = await readFile(path, 'utf8');
   if (/(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}|-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----)/.test(source)) errors.push(`Possible credential: ${name}`);
   if (/[A-Za-z]:[\\/](?:Users|Serene)[\\/]/i.test(source)) errors.push(`Machine-specific path: ${name}`);
+  if (extname(path) === '.md') {
+    const prose = source.replace(/```[\s\S]*?```/g, '');
+    const links = [...prose.matchAll(/!?\[[^\]]*\]\(([^\s)]+)\)/g),
+      ...prose.matchAll(/\b(?:src|href)="([^"]+)"/g)];
+    for (const match of links) {
+      if (/^(?:https?:|mailto:|#)/.test(match[1])) continue;
+      const target = resolve(dirname(path), decodeURIComponent(match[1].split('#')[0]));
+      if (relative(root, target).startsWith('..')) { errors.push(`Document link escapes package: ${name}`); continue; }
+      try { await access(target); } catch { errors.push(`Broken document link in ${name}: ${match[1]}`); }
+    }
+  }
   if (!['.ts', '.vue'].includes(extname(path))) continue;
   if (/['"]@\//.test(source)) errors.push(`Host-specific import alias: ${name}`);
   // A lightweight check for this bundle's static imports, not a JavaScript parser.

@@ -27,11 +27,16 @@ receiving application's existing icon library.
 ## Example photographs
 
 `assets/catalog.ts` contains replaceable remote image URLs hosted on
-`images.unsplash.com`. No photograph files are included in this distribution.
+`images.unsplash.com`. Documentation screenshots and rendered card examples in
+`docs/images/` include these photographs; standalone source photographs are not bundled.
 Those images are not licensed under this repository's MIT license. Check the
 source image's applicable terms and permissions before publishing screenshots,
 redistributing photographs, or using them in a product. Prefer your own images
 or images for which you have confirmed the necessary rights.
+
+The documentation examples use the [Unsplash License](https://unsplash.com/license).
+Source URLs and reproduction notes are listed in [the gallery](docs/gallery.md#素材与复现).
+The repository MIT license does not relicense the underlying photographs.
 
 Remote URLs may become unavailable, require network access, or fail CORS checks.
 User-uploaded images and configuration exports must not be committed to this

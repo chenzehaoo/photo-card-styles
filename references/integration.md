@@ -1,5 +1,7 @@
 # Integration
 
+[Overview](../README.md) · [Architecture](../docs/architecture.md) · [Visual examples](../docs/gallery.md)
+
 ## Vue card
 
 Copy `PhotoCard.vue`, `catalog.ts`, `styles.css` and `fonts/` together. The basic card requires Vue 3. The full studio additionally requires `three` (tested 0.184), `html-to-image` (1.11.13), and `fflate` (0.8.3), with compatible `@types/three` for TypeScript. No Serene backend, API key or account is needed.
